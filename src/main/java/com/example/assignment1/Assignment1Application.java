@@ -12,9 +12,4 @@ public class Assignment1Application {
 		SpringApplication.run(Assignment1Application.class, args);
 	}
 
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
-
 }

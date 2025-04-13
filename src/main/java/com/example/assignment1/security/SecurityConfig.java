@@ -41,20 +41,21 @@ public class SecurityConfig {
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
-                        .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/", "/list", "/register").permitAll()
-                                .requestMatchers("/new_item").hasAnyRole("ADMIN", "EMPLOYEE")
-                                .requestMatchers("/admin/**").hasRole("ADMIN") // Only admins can access admin routes
-                                .anyRequest().authenticated())
-                        .formLogin(form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/", true)
-                                .permitAll())
-                        .logout(logout -> logout
-                                .logoutUrl("/logout")
-                                .logoutSuccessUrl("/login?logout")
-                                .permitAll());
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers("/", "/list", "/register").permitAll()
+                                                .requestMatchers("/new_item").hasAnyRole("ADMIN", "EMPLOYEE")
+                                                .requestMatchers("/admin/**").hasRole("ADMIN") // Only admins can access
+                                                                                               // admin routes
+                                                .anyRequest().authenticated())
+                                .formLogin(form -> form
+                                                .loginPage("/login")
+                                                .loginProcessingUrl("/login")
+                                                .defaultSuccessUrl("/", true)
+                                                .permitAll())
+                                .logout(logout -> logout
+                                                .logoutUrl("/logout")
+                                                .logoutSuccessUrl("/login?logout")
+                                                .permitAll());
 
                 return http.build();
         }
